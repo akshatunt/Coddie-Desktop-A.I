@@ -1,11 +1,11 @@
-import pyttsx3                      # pip install pyttsx3
-import speech_recognition as sr     # pip install speechRecognition
+import pyttsx3  # pip install pyttsx3
+import speech_recognition as sr  # pip install speechRecognition
 import datetime
 import time
 import json
 import requests
 import subprocess
-import wikipedia                    # pip install wikipedia
+import wikipedia  # pip install wikipedia
 import webbrowser
 import wolframalpha
 import os
@@ -14,7 +14,6 @@ import sys
 import pyautogui
 import smtplib
 import urllib
-import requests
 from bs4 import BeautifulSoup
 from googlesearch import search
 from selenium import webdriver
@@ -25,13 +24,16 @@ voices = engine.getProperty("voices")
 # print(voices[1].id)
 engine.setProperty("voice", voices[0].id)
 
+
 # define speak fuction:
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
+
 # NOTICE:
 print("make sure you are connected to the internet!")
+
 
 # Define wishme function that uses present time to greet you
 def wishMe():
@@ -47,8 +49,9 @@ def wishMe():
 
     speak("I am coodie Sir. Please tell me how may I help you")
 
-# def search_web(query): 
-  
+
+# def search_web(query):
+
 #     driver = webdriver.Firefox() 
 #     driver.implicitly_wait(1) 
 #     driver.maximize_window() 
@@ -65,9 +68,10 @@ def takeCommand():
     try:
         print("Recognizing...")
         query = r.recognize_google(audio, language="en-in")
-        print(f"User said: {query}\n")
+        print(f
+        "User said: {query}\n")
 
-    except Exception as e:
+        except Exception as e:
         print(e)
         print("Say that again please...")
         return "None"
@@ -129,9 +133,10 @@ if __name__ == "__main__":
 
         elif "the time" in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
-            speak(f"Sir, the time is {strTime}")
+            speak(f
+            "Sir, the time is {strTime}")
 
-        elif "rediffmail" in query:
+            elif "rediffmail" in query:
             speak("opening rediff mail")
             webbrowser.open("mail.rediff.com")
 
@@ -178,34 +183,35 @@ if __name__ == "__main__":
             num1 = int(input("Enter the First number:\n"))
             num2 = int(input("Enter the Second number:\n"))
 
-            if num2>num1:
+            if num2 > num1:
                 mn = num1
 
             else:
                 mn = num2
 
-            for i in range(1, mn+1):
-                if num1%i==0 and num2%i==0:
+            for i in range(1, mn + 1):
+                if num1 % i == 0 and num2 % i == 0:
                     hcf = i
 
-            print(f"The HCF of these two numbers is {hcf}")
+            print(f
+            "The HCF of these two numbers is {hcf}")
             speak("The hcf of {num1} and {num2} is {hcf}")
 
-        elif 'search'  in query:
+        elif 'search' in query:
             query = query.replace("search", "")
             webbrowser.open_new_tab(query)
             time.sleep(5)
 
         elif "weather" in query:
-            api_key="a0bfb859d9737f01f4e9d1606e26ec9a"
-            base_url="https://api.openweathermap.org/data/2.5/weather?"
+            api_key = "a0bfb859d9737f01f4e9d1606e26ec9a"
+            base_url = "https://api.openweathermap.org/data/2.5/weather?"
             speak("what is the city name")
-            city_name=takeCommand()
-            complete_url=base_url+"appid="+api_key+"&q="+city_name
+            city_name = takeCommand()
+            complete_url = base_url + "appid=" + api_key + "&q=" + city_name
             response = requests.get(complete_url)
-            x=response.json()
-            if x["cod"]!="404":
-                y=x["main"]
+            x = response.json()
+            if x["cod"] != "404":
+                y = x["main"]
                 current_temperature = y["temp"]
                 current_humidiy = y["humidity"]
                 z = x["weather"]
@@ -223,23 +229,23 @@ if __name__ == "__main__":
                       "\n description = " +
                       str(weather_description))
 
-        elif "calculate" in query: 
+        elif "calculate" in query:
 
-            speak("calculating")  
+            speak("calculating")
             # write your wolframalpha app_id here 
-            app_id = "9U75J8-KGK7EKP3YT" 
-            client = wolframalpha.Client(app_id) 
-  
-            indx = query.lower().split().index('calculate') 
-            getinput = query.split()[indx + 1:] 
-            res = client.query(' '.join(getinput)) 
-            answer = next(res.results).text 
+            app_id = "9U75J8-KGK7EKP3YT"
+            client = wolframalpha.Client(app_id)
+
+            indx = query.lower().split().index('calculate')
+            getinput = query.split()[indx + 1:]
+            res = client.query(' '.join(getinput))
+            answer = next(res.results).text
             speak("The answer is " + answer)
-        
+
         elif 'ask' in query:
             speak('I can answer to computational and geographical questions  and what question do you want to ask now')
-            question=takeCommand()
-            app_id="9U75J8-KGK7EKP3YT"
+            question = takeCommand()
+            app_id = "9U75J8-KGK7EKP3YT"
             client = wolframalpha.Client('R2K75H-7ELALHR35X')
             res = client.query(question)
             answer = next(res.results).text
@@ -247,39 +253,41 @@ if __name__ == "__main__":
             print(answer)
 
         elif "roman number" in query:
-            def printRoman(number): 
-                num = [1, 4, 5, 9, 10, 40, 50, 90,  
-                       100, 400, 500, 900, 1000] 
-                sym = ["I", "IV", "V", "IX", "X", "XL",  
-                       "L", "XC", "C", "CD", "D", "CM", "M"] 
+            def printRoman(number):
+                num = [1, 4, 5, 9, 10, 40, 50, 90,
+                       100, 400, 500, 900, 1000]
+                sym = ["I", "IV", "V", "IX", "X", "XL",
+                       "L", "XC", "C", "CD", "D", "CM", "M"]
                 i = 12
-                while number: 
-                    div = number // num[i] 
-                    number %= num[i] 
-              
-                    while div: 
-                        print(sym[i], end = "") 
+                while number:
+                    div = number // num[i]
+                    number %= num[i]
+
+                    while div:
+                        print(sym[i], end="")
                         div -= 1
                     i -= 1
-              
+
+
             # Driver code 
-            if __name__ == "__main__": 
+            if __name__ == "__main__":
                 number = int(input("Enter the number:\n"))
-                print("Roman numeral is:", end = " ") 
+                print("Roman numeral is:", end=" ")
                 printRoman(number)
-                
+
         elif 'lcm' in query:
             a = int(input("Enter first number:\n"))
             b = int(input("Enter second number:\n"))
 
             maxNum = max(a, b)
 
-            while(True):
-                    if(maxNum%a==0 and maxNum%b == 0):
-                            break
-                    maxNum = maxNum + 1
+            while (True):
+                if (maxNum % a == 0 and maxNum % b == 0):
+                    break
+                maxNum = maxNum + 1
 
-            print(f"The LCM of {a} and {b} is {maxNum}")
+            print(f
+            "The LCM of {a} and {b} is {maxNum}")
             pyautogui.PAUSE = 6
             speak("the lcm of {a} and {b} is {maxNum}")
 
@@ -289,7 +297,7 @@ if __name__ == "__main__":
             os.startfile(main.py)
 
         elif 'how are you' in query:
-            print("I am fine sir!")
+            print("I am fine sir!, how are you")
             speak("i am fine sir")
 
         elif 'open workspace' in query:
@@ -300,7 +308,7 @@ if __name__ == "__main__":
         elif "log off" in query or "sign out" in query:
             speak("Ok , your pc will log off in 10 sec make sure you exit from all applications")
             subprocess.call(["shutdown", "/l"])
-                
+
 time.sleep(3)
 
 # wolframalpha App ID = 9U75J8-KGK7EKP3YT
